@@ -1,0 +1,30 @@
+# Node modules & Vite
+**/node_modules
+**/dist
+**/.vite
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/.mypy_cache
+**/.pytest_cache
+
+# Virtual env
+**/venv/
+**/.venv/
+
+# OS/System
+.DS_Store
+Thumbs.db
+
+# Env
+**/.env
+
+# VSCode settings
+.vscode/
+
+# Log files
+*.log
+
+# Uploads/generated
+backend/app/uploads/
