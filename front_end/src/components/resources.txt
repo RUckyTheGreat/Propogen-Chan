@@ -1,0 +1,8 @@
+ALL ASSETS FROM:
+
+https://getstickerpack.com/stickers/menhera-chan-emoji-v1
+
+
+EASINGS:
+
+cubic-bezier(0.19, 1, 0.22, 1);

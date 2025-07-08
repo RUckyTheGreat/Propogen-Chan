@@ -2,44 +2,190 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <title>Proposal - {{ data.judul }}</title>
+  <title>Proposal - {{ data.cover.judul }}</title>
   <style>
+    @page {
+      margin: 50px;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 12pt;
+      }
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
+      font-family: 'Times New Roman', serif;
+      font-size: 12pt;
       line-height: 1.6;
+      padding: 40px;
+      text-align: justify;
     }
+
     h1 {
-      color: #2c3e50;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 5px;
+      text-align: center;
+      font-size: 48pt; /* 2x dari sebelumnya */
+      margin-bottom: 10px;
     }
-    .section {
-      margin-top: 30px;
+
+    h2 {
+      text-align: center;
+      font-size: 36pt;
+      margin-bottom: 10px;
     }
+
     .section-title {
       font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 10px;
+      font-size: 32pt;
+      text-align: center;
+      margin: 60px 0 30px;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 4px 0;
+    }
+
+    .page-number {
+      width: 80px;
+      text-align: right;
+      padding-left: 20px;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+
+    .cover-container {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .cover-container p {
+      margin: 6px 0;
+    }
+
+    .cover-logo {
+      width: 180px;
+      margin: 30px auto;
+      display: block;
+    }
+
+    .penyusun {
+      margin-top: 30px;
+      margin-bottom: 50px; /* jarak dengan sekolah */
+    }
+
+    .instansi {
+      margin-top: 20px;
+    }
+
+    .paragraf {
+      text-indent: 1.25cm;
+      margin-bottom: 20pt;
+    }
+
+    .penulis-tanggal {
+      margin-top: 50px;
+      text-align: right;
+      font-size: 14pt;
+      line-height: 1.8;
+    }
+
+    .bab-section {
+      margin-top: 80px;
     }
   </style>
 </head>
 <body>
-  <h1>{{ data.judul }}</h1>
 
-  <div class="section">
-    <div class="section-title">Nama Pengirim:</div>
-    <p>{{ data.nama }}</p>
+  <!-- Cover Page -->
+  <div class="cover-container">
+    <h1>{{ data.cover.judul | upper }}</h1>
+    <h2>{{ data.cover.subjudul }}</h2>
+    <p>Disusun untuk memenuhi salah satu tugas</p>
+    <p>yang dibimbing oleh <strong>{{ data.cover.pembimbing }}</strong></p>
+
+    {% if data.cover.logo_path %}
+      <img src="{{ data.cover.logo_path }}" alt="Logo Sekolah" class="cover-logo" />
+    {% endif %}
+
+    <div class="penyusun">
+      <p><strong>Disusun oleh:</strong></p>
+      {% for nama in data.cover.penyusun %}
+        <p>{{ loop.index }}. {{ nama }}</p>
+      {% endfor %}
+    </div>
+
+    <div class="instansi">
+      <p><strong>{{ data.cover.sekolah | upper }}</strong><br>{{ data.cover.alamat }}</p>
+    </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">Email:</div>
-    <p>{{ data.email }}</p>
+  <!-- Kata Pengantar -->
+  <div class="page-break">
+    <div class="section-title">KATA PENGANTAR</div>
+    {% for paragraph in data.intro.kataPengantar.split('\n') %}
+      <p class="paragraf">{{ paragraph }}</p>
+    {% endfor %}
+    <div class="penulis-tanggal">
+      {{ data.intro.tempatTanggal }}<br>
+      <strong>{{ data.intro.penulis }}</strong>
+    </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">Isi Proposal:</div>
-    <p>{{ data.isi }}</p>
+  <!-- Daftar Isi -->
+  <div class="page-break">
+    <div class="section-title">DAFTAR ISI</div>
+    <table>
+      <tr>
+        <td>KATA PENGANTAR</td>
+        <td class="page-number">i</td>
+      </tr>
+      <tr>
+        <td>DAFTAR ISI</td>
+        <td class="page-number">ii</td>
+      </tr>
+      {% for item in data.toc %}
+      <tr>
+        <td>{{ item }}</td>
+        <td class="page-number">{{ loop.index }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td>DAFTAR PUSTAKA</td>
+        <td class="page-number">{{ data.toc|length + 1 }}</td>
+      </tr>
+    </table>
   </div>
+
+  <!-- Isi Bab -->
+  {% for bab, isi in data.content.items() %}
+  <div class="page-break bab-section">
+    <h2>{{ bab }}</h2>
+    {% for paragraph in isi.split('\n') %}
+      <p class="paragraf">{{ paragraph }}</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <!-- Daftar Pustaka -->
+  <div class="page-break bab-section">
+    <div class="section-title">DAFTAR PUSTAKA</div>
+    <p class="paragraf">Berikut adalah daftar pustaka yang digunakan dalam penyusunan proposal ini:</p>
+    <ol>
+      {% for ref in data.references %}
+        <li>{{ ref }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+
 </body>
 </html>

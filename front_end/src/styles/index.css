@@ -1,11 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🎨 Dracula Theme Variables */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --dracula-bg: #282a36;
+  --dracula-fg: #f8f8f2;
+  --dracula-purple: #bd93f9;
+  --dracula-pink: #ff79c6;
+  --dracula-green: #50fa7b;
+  --dracula-yellow: #f1fa8c;
+  --dracula-cyan: #8be9fd;
+  --dracula-red: #ff5555;
+
+  font-family: 'JetBrains Mono', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--dracula-fg);
+  background-color: var(--dracula-bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,28 +26,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 🌐 Global Link Style */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--dracula-purple);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--dracula-pink);
 }
 
+/* 🌍 Global Body Layout */
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--dracula-bg);
+  color: var(--dracula-fg);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* 🧠 Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dracula-purple);
 }
 
+/* 🕹️ Buttons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -42,27 +60,31 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--dracula-pink);
+  color: var(--dracula-bg);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s ease-in-out;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: var(--dracula-purple);
+  color: var(--dracula-bg);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--dracula-yellow);
 }
 
+/* 🌓 Light Mode Fallback */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: var(--dracula-bg);
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--dracula-red);
   }
   button {
     background-color: #f9f9f9;
+    color: var(--dracula-bg);
   }
 }
