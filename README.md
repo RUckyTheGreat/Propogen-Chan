@@ -5,7 +5,7 @@ Propogen-Chan adalah aplikasi pembuat **proposal otomatis berbasis web**, dibuat
 
 > Dibuat oleh: **RuckyTheGreat** 🚀  
 > 🌐 Live Preview: [propogen-chan.vercel.app](https://propogen-chan-qk1e.vercel.app/)
-
+> 🤑 Software propogen-chan khusus windows: [propogen-chan-win32-x64](https://www.mediafire.com/file/1a4hmhb46n0t6bn/propogen-chan-win32-x64.zip/file)
 ---
 
 ## 🛠️ Fitur Utama
