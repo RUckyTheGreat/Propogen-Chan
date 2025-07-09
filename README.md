@@ -4,7 +4,7 @@
 Propogen-Chan adalah aplikasi pembuat **proposal otomatis berbasis web**, dibuat menggunakan **React (Vite)** di frontend dan **FastAPI** di backend. Aplikasi ini memungkinkan pengguna mengisi form interaktif dan mendapatkan hasil proposal dalam bentuk **PDF profesional**, lengkap dengan cover, kata pengantar, daftar isi, isi proposal, hingga daftar pustaka.
 
 > Dibuat oleh: **RuckyTheGreat** 🚀  
-> 🌐 Live Preview: [propogen-chan.vercel.app](https://propogen-chan-qk1e.vercel.app/)
+> 🌐 Live Preview: [propogen-chan.vercel.app](https://propogen-chan-qk1e.vercel.app/) <br>
 > 🤑 Software propogen-chan khusus windows: [propogen-chan-win32-x64](https://www.mediafire.com/file/1a4hmhb46n0t6bn/propogen-chan-win32-x64.zip/file)
 ---
 
