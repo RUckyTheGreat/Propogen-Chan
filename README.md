@@ -1,200 +1,217 @@
 
-# 📄 Propogen-Chan - Proposal Generator Web App
+# 📄 Propogen-Chan — Proposal Generator Web App
 
-Propogen-Chan adalah aplikasi pembuat **proposal otomatis berbasis web**, dibuat menggunakan **React (Vite)** di frontend dan **FastAPI** di backend. Aplikasi ini memungkinkan pengguna mengisi form interaktif dan mendapatkan hasil proposal dalam bentuk **PDF profesional**, lengkap dengan cover, kata pengantar, daftar isi, isi proposal, hingga daftar pustaka.
+Propogen-Chan adalah aplikasi pembuat proposal otomatis berbasis web.  
+User hanya isi form — hasilnya langsung jadi **PDF profesional** berisi:
 
-> Dibuat oleh: **RuckyTheGreat** 🚀  
-> 🌐 Live Preview: [propogen-chan.vercel.app](https://propogen-chan-qk1e.vercel.app/) <br>
-> 🤑 Software propogen-chan khusus windows: [propogen-chan-win32-x64](https://www.mediafire.com/file/41ifbilgvdj9frk/propogen-chan-1.0.0_Setup.exe/file)
----
+✔ Cover proposal  
+✔ Kata pengantar  
+✔ Daftar isi  
+✔ Isi proposal (section dinamis)  
+✔ Daftar pustaka
 
-## 🛠️ Fitur Utama
-
-- ✅ Upload logo sekolah/organisasi
-- ✅ Isi form step-by-step untuk semua bagian proposal
-- ✅ Progress bar interaktif dengan karakter emote lucu (anime vibes 🥺)
-- ✅ Preview dan download hasil proposal dalam format PDF
-- ✅ UI modern dan animatif dengan React + Tailwind
-- ✅ Server backend dengan FastAPI (struktur modular)
-- ✅ PDF dibuat dari HTML menggunakan pdfkit + wkhtmltopdf
-- ✅ Otomatis hapus file lama (lebih dari 1 hari)
-- ✅ Berjalan di OS sendiri tanpa butuh server berbayar
+> ✨ Developer: **RuckyTheGreat**  
+> 🏫 SMKN 2 Bandung — PPLG  
+> 💻 Teknologi: FastAPI + React + Tailwind + wkhtmltopdf
 
 ---
 
-## 📦 Teknologi yang Digunakan
+## ⭐ Fitur Utama
 
-| Teknologi     | Keterangan                         |
-|---------------|-------------------------------------|
-| React (Vite)  | Frontend SPA                        |
-| TailwindCSS   | Styling responsif & animatif        |
-| FastAPI       | Backend & API RESTful              |
-| Python 3.11+  | Bahasa backend                      |
-| pdfkit + wkhtmltopdf | Konversi HTML ke PDF        |
-| Jinja2        | Template engine untuk isi proposal  |
+| Fitur | Status |
+|------|--------|
+| Upload logo untuk cover | ✅ |
+| Progress bar dengan karakter imut | ✅ |
+| Export PDF dengan template rapi | ✅ |
+| Cleanup otomatis file PDF lama | ✅ |
+| UI React + Tailwind (Vite) | ✅ |
+| Backend modular dengan FastAPI | ✅ |
 
 ---
 
-## 📁 Struktur Proyek
+## 📦 Teknologi
+
+| Stack | Detail |
+|-------|-------|
+| **Frontend** | React + Vite + TailwindCSS |
+| **Backend** | FastAPI |
+| **PDF Engine** | pdfkit + wkhtmltopdf |
+| **Templating** | Jinja2 |
+| **Python** | 3.10+ |
+
+---
+
+## 📂 Struktur Proyek
+
+```
+Propogen-Chan/
+│
+├── front_end/       # React + Vite (UI)
+│   ├── src/
+│   ├── public/
+│   └── .env         # Wajib dibuat manual
+│
+└── back_end/
+    ├── App/
+    │   ├── main.py      # Entry FastAPI
+    │   ├── api.py
+    │   ├── templates/   # Template HTML ke PDF
+    │   ├── uploads/     # Logo & PDF output
+    │   └── utils/cleanup.py
+```
+
+---
+
+## 🧰 📌 Prasyarat (Install Dulu)
+
+| Item | Link Download |
+|------|---------------|
+| Python 3.10+ | https://www.python.org/downloads/ |
+| Node.js LTS | https://nodejs.org/en/download |
+| wkhtmltopdf | https://wkhtmltopdf.org/downloads.html |
+| Git (Opsional) | https://git-scm.com/downloads |
+
+Setelah install wkhtmltopdf, cek versi:
+
+```powershell
+& "C:\Program Files\wkhtmltopdfin\wkhtmltopdf.exe" --version
+```
+
+Jika muncul versi ➜ ✅ sukses
+
+---
+
+## ⚙️ Instalasi & Setup Project
+
+### ✅ 1️⃣ Setup Backend
+
+Masuk folder backend:
 
 ```bash
-Propogen-Chan/
-├── front_end/
-│   ├── src/
-│   │   ├── pages/
-│   │   ├── components/
-│   │   ├── assets/
-│   │   └── main.jsx
-│   └── public/
-│       └── index.html
-│
-├── back_end/
-│   └── App/
-│       ├── api.py
-│       ├── main.py
-│       ├── models/
-│       │   └── proposal.py
-│       ├── pdf/
-│       │   └── generator.py
-│       ├── utils/
-│       │   └── cleanup.py
-│       ├── templates/
-│       │   └── proposal_template.html
-│       └── uploads/
+cd back_end
+pip install -r requirements.txt
 ```
 
----
+Edit path wkhtmltopdf di:
 
-## 🚀 Cara Penggunaan
-
-### 1. Masuk ke halaman utama
-
-📍 [https://propogen-chan-qk1e-cm1lac37h-ruckynothumans-projects.vercel.app/](https://propogen-chan-qk1e.vercel.app/)
-
-### 2. Isi form per langkah:
-
-- 📄 **Cover Proposal**: Judul, subjudul, pembimbing, penyusun, alamat, logo
-- ✍️ **Kata Pengantar**: Isi teks, tempat dan tanggal, penulis
-- 📚 **Daftar Isi**: List (array string)
-- 📑 **Isi Proposal**: Berisi section (key = judul, value = isi)
-- 📎 **Daftar Pustaka**: List referensi (array string)
-
-### 3. Submit
-
-- Data dikirim ke backend FastAPI
-- Render ke HTML (pakai Jinja2)
-- HTML diubah ke PDF pakai pdfkit + wkhtmltopdf
-- PDF disimpan di `/uploads` dan dikembalikan URL-nya
-
-### 4. Download PDF
-
-- Di halaman success, klik tombol "Download Proposal"
-- Akan diarahkan ke file PDF
-- Setelah 3 detik otomatis kembali ke halaman awal
-
----
-
-## 🧹 Pembersihan File Otomatis
-
-File lama (lebih dari 1 hari) akan dihapus otomatis setiap kali backend `/generate` dipanggil.
+📌 `App/pdf/generator.py`
 
 ```py
-# utils/cleanup.py
-EXPIRY_SECONDS = 60 * 60 * 24  # 1 hari
+wkhtml_path = r"C:\Program Files\wkhtmltopdfin\wkhtmltopdf.exe"
 ```
+
+🛠 Jalankan Backend:
+
+```bash
+uvicorn App.main:app --reload
+```
+
+Jika sukses ➜ buka:
+👉 http://127.0.0.1:8000
 
 ---
 
-## 🧠 API Endpoint
+### ✅ 2️⃣ Setup Frontend
 
-### `POST /upload`
+Masuk folder:
 
-Upload logo (tipe form-data, key = `file`)
+```bash
+cd front_end
+npm install
+```
 
-Response:
+Buat file baru `.env` di **front_end**:
+
+```
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+Jalankan frontend:
+
+```bash
+npm run dev
+```
+
+Jika sukses ➜ buka:
+👉 http://127.0.0.1:5173
+
+---
+
+## 🚀 Cara Pakai
+
+1️⃣ Isi form step-by-step  
+2️⃣ Upload logo cover  
+3️⃣ Submit di halaman **Daftar Pustaka**  
+4️⃣ Download PDF yang sudah jadi otomatis ✅
+
+---
+
+## 🔌 API Endpoint
+
+| Method | Route | Fungsi |
+|--------|-------|--------|
+| POST | /upload | Upload logo |
+| POST | /generate | Generate PDF proposal |
+| GET | / | Test backend |
+
+---
+
+### Contoh Request ke `/generate`
+
 ```json
 {
-  "url": "/uploads/logo_1720432400.98899.png",
-  "path": "C:/Users/u/Documents/Propogen-Chan/back_end/app/uploads/logo_1720432400.98899.png"
+  "cover": {...},
+  "intro": {...},
+  "toc": [...],
+  "content": {...},
+  "references": [...]
 }
 ```
 
-### `POST /generate`
+Return:
 
-Kirim seluruh data proposal:
-
-```json
-{
-  "cover": {
-    "judul": "Judul Proposal",
-    "subjudul": "Subjudul",
-    "pembimbing": "Ibu Guru Pembimbing",
-    "penyusun": ["Nama Siswa A", "Nama Siswa B"],
-    "sekolah": "SMKN 2 Bandung",
-    "alamat": "Jl. Buah Batu",
-    "logo_path": "C:/.../logo.png"
-  },
-  "intro": {
-    "kataPengantar": "Puji syukur...",
-    "tempatTanggal": "Bandung, 8 Juli 2025",
-    "penulis": "Rucky"
-  },
-  "toc": ["Cover", "Kata Pengantar", "Daftar Isi", "Isi Proposal", "Daftar Pustaka"],
-  "content": {
-    "Pendahuluan": "Ini adalah pendahuluan...",
-    "Tujuan": "Untuk mengikuti lomba",
-    "Penutup": "Semoga disetujui"
-  },
-  "references": ["Buku Proposal Hebat 2022", "Internet, Wikipedia"]
-}
-```
-
-Response:
 ```json
 {
   "message": "Proposal berhasil dibuat",
-  "url": "/uploads/Judul_Proposal_1720432512.2383.pdf"
+  "url": "/uploads/NamaProposal_12345.pdf"
 }
 ```
 
 ---
 
-## 🎨 Waifu Progress Tracker
+## 🧹 Auto Cleanup
 
-| Halaman           | Rating |
-|-------------------|--------|
-| Cover             | 0%     |
-| Kata Pengantar    | 30%    |
-| Daftar Isi        | 55%    |
-| Isi Proposal      | 75%    |
-| Daftar Pustaka    | 100%   |
+File PDF lama > 24 jam otomatis terhapus setiap kali generate PDF.
+
+```py
+EXPIRY_SECONDS = 60 * 60 * 24
+```
 
 ---
 
-## 📁 Upload & PDF Path
+## 🎴 Cute Progress UI
 
-- File logo dan PDF disimpan di `app/uploads/`
-- Bisa diakses via URL: `https://your-backend-domain/uploads/...`
-
----
-
-## 👨‍💻 Developer
-
-**Nama:** RuckyTheGreat  
-**Sekolah:** SMKN 2 - PPLG X  
-**Github:** [@RuckIs](https://github.com/RuckIs)
+✔ 0% — Cover  
+✔ 30% — Kata Pengantar  
+✔ 55% — Daftar Isi  
+✔ 75% — Isi Proposal  
+✔ 100% — Daftar Pustaka
 
 ---
 
-## 📃 License
+## 👨‍💻 Author
 
-MIT License — Bebas digunakan dan dimodifikasi untuk pendidikan atau proyek pribadi.
+| Info | Detail |
+|------|--------|
+| Developer | **RuckyTheGreat** |
+| Sekolah | SMKN 2 Bandung — PPLG |
+| GitHub | https://github.com/RuckIs |
 
 ---
 
-## 🙌 Terima Kasih
+## 📜 Lisensi
 
-Kalau suka proyek ini:
-- ⭐ Kasih bintang di GitHub
-- 💬 Gunakan untuk lomba / tugas sekolah
-- 🎓 Jangan lupa belajar juga backend-nya ya!
+MIT License — Bebas digunakan untuk tugas sekolah & edukasi ✅
+
+---
+
