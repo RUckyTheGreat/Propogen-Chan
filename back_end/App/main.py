@@ -5,10 +5,10 @@ from App.api import router as api_router
 
 app = FastAPI()
 
-# Mount folder uploads ke route /uploads (buat akses file PDF dan logo)
-app.mount("/uploads", StaticFiles(directory="app/uploads"), name="uploads")
+# ✅ Serve uploaded files
+app.mount("/uploads", StaticFiles(directory="App/uploads"), name="uploads")
 
-# Middleware untuk izinkan akses dari frontend React (Vite)
+# ✅ CORS: Izinkan akses frontend Vite
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -20,5 +20,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# Tambahkan semua route dari router
+# ✅ Import router API
 app.include_router(api_router)
+
+# ✅ Root test API
+@app.get("/")
+def root():
+    return {"status": "Backend is running 🚀"}
