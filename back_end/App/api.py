@@ -13,9 +13,9 @@ from .utils.cleanup import cleanup_uploads  # ✅ Auto hapus file lama
 router = APIRouter()
 
 # Setup Jinja2
-env = Environment(loader=FileSystemLoader("app/templates"))
+env = Environment(loader=FileSystemLoader("App/templates"))
 
-UPLOAD_DIR = "app/uploads"
+UPLOAD_DIR = "App/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # === [1] Endpoint Upload Logo ===
