@@ -15,6 +15,11 @@ User hanya isi form — hasilnya langsung jadi **PDF profesional** berisi:
 > 💻 Teknologi: FastAPI + React + Tailwind + wkhtmltopdf
 
 ---
+## Preview
+
+![Preview](Animation3.gif)
+
+---
 
 ## ⭐ Fitur Utama
 
